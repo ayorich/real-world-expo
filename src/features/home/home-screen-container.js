@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { HeaderButton } from '../../components/header-button';
 import { withHeader } from '../navigation/with-header';
-import { withNotificationPermissions } from '../onboarding/with-notification-permission';
+import { withNotificationPermissions } from '../onboarding/with-notification-permissions';
 import {
   reminderDeleted,
   selectRemindersArray,

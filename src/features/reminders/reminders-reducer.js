@@ -1,5 +1,13 @@
 import { pipe, prop, values } from 'ramda';
 import { createReminder } from './reminders-factories';
+import {
+  selectActiveWeekdayIntegers,
+  selectDayEndTime,
+  selectDayStartTime,
+  selectRemindersPerDay,
+} from '../settings/settings-reducer';
+import { createNotificationSchedule } from './reminders-helpers';
+
 export const sliceName = 'reminders';
 
 const initialState = {
@@ -78,3 +86,12 @@ export const selectRemindersArray = pipe(selectReminders, values);
 
 export const selectReminderById = (state, reminderId) =>
   pipe(selectReminders, prop(reminderId))(state);
+
+export const selectReminderNotificationSchedule = state =>
+  createNotificationSchedule({
+    reminders: selectRemindersArray(state),
+    activeDays: selectActiveWeekdayIntegers(state),
+    startTime: selectDayStartTime(state),
+    endTime: selectDayEndTime(state),
+    remindersPerDay: selectRemindersPerDay(state),
+  });
